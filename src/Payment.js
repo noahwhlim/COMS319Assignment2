@@ -1,11 +1,40 @@
 import React, { useState } from 'react';
 import {Button, Modal} from 'react-bootstrap';
+import Confirmation from "./Confirmation"
 
 function Payment() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [name, setName] = useState('');
+  const [card, setCard] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [cvv, setCvv] = useState('');
+
+
+
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  };
+
+  const handleCardChange = (event) => {
+    const value = event.target.value;
+    setCard(value);
+  };
+
+  const handleExpiryChange = (event) => {
+    const value = event.target.value;
+    setExpiry(value);
+  };
+
+  const handleCvvChange = (event) => {
+    const value = event.target.value;
+    setCvv(value);
+  };
+
 
   return (
     <>
@@ -25,25 +54,25 @@ function Payment() {
                 <div class="col-12">
                     <div class="d-flex flex-column">
                         <p class="text mb-1">Cardholder Name</p>
-                        <input class="form-control mb-3" type="text" placeholder="Name"/>
+                        <input class="form-control mb-3" type="text" placeholder="Name" onChange={handleNameChange}  value={name}/>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-column">
                         <p class="text mb-1">Card Number</p>
-                        <input class="form-control mb-3" type="text" placeholder="1234 5678 435678"/>
+                        <input class="form-control mb-3" type="text" placeholder="1234 5678 1234 5678" onChange={handleCardChange}  value={card}/>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-flex flex-column">
                         <p class="text mb-1">Expiry</p>
-                        <input class="form-control mb-3" type="text" placeholder="MM/YYYY"/>
+                        <input class="form-control mb-3" type="text" placeholder="MM/YYYY" onChange={handleExpiryChange}  value={expiry}/>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-flex flex-column">
                         <p class="text mb-1">CVV/CVC</p>
-                        <input class="form-control mb-3 pt-2 " type="password" placeholder="***"/>
+                        <input class="form-control mb-3 pt-2 " type="password" placeholder="***" onChange={handleCvvChange}  value={cvv}/>
                     </div>
                 </div>
 
@@ -52,12 +81,13 @@ function Payment() {
     </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose} data-bs-toggle="collapse">
                 Go Back
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            {/* <Button variant="primary" data-dismiss="modal" onclick={handleClose}>
                 Submit
-            </Button>
+            </Button> */}
+            <Confirmation onClick={handleClose} name={name} card={card} expiry={expiry} cvv={cvv} />
         </Modal.Footer>
       </Modal>
     </>
