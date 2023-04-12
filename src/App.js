@@ -26,7 +26,6 @@ const App = () => {
 
   const addToCart = (el) => {
     setCart([...cart, el]);
-    console.log("increase")
   };
 
   const removeFromCart = (el) => {
@@ -43,33 +42,10 @@ const App = () => {
   const cartItems = cart.map((el) => (
     <div key={el.id}>
         <img class="img-fluid" src={el.image} width={30} />
-        {el.title}
-        ${el.price}
+        {el.title} ${el.price}
+        <hr/>
     </div>
   )); 
-
-  const popup = (cartTotal) => {
-    <div class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-            <p>Total is {cartTotal}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  }
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -194,7 +170,17 @@ const App = () => {
                         <h5>${cartTotal.toFixed(2)}</h5>
                       </div>
 
+                      {/* <button className="btn btn-dark btn-block btn-lg" onClick={() => printCart()}>
+                        Check Cart
+                      </button> */}
+
+                      <div>
+                        {cartItems}
+                      </div>
+
                       <Payment/>
+
+                      
 
                     </div>
                   </div>
